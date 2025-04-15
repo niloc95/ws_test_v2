@@ -187,11 +187,24 @@ function vendor(done) {
     done();
 }
 
+function copyEnvTemplate(done) {
+    // Copy .env.example to .env in the build directory if .env does not already exist
+    const src = '.env.example';
+    const dest = 'build/.env';
+    if (!fs.existsSync(dest)) {
+        fs.copySync(src, dest);
+        console.log('.env file created in build/ from .env.example');
+    } else {
+        console.log('.env already exists in build/, not overwritten.');
+    }
+    done();
+}
+
 exports.clean = gulp.series(clean);
 exports.vendor = gulp.series(vendor);
 exports.scripts = gulp.series(scripts);
 exports.styles = gulp.series(styles);
 exports.compile = gulp.series(clean, vendor, scripts, styles);
 exports.dev = gulp.series(clean, vendor, scripts, styles, watch);
-exports.build = gulp.series(clean, vendor, scripts, styles, archive);
+exports.build = gulp.series(clean, vendor, scripts, styles, archive, copyEnvTemplate);
 exports.default = exports.dev;
