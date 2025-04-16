@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) Nilo Cara
  * @license     https://opensource.org/licenses/GPL-3.0 - GPLv3
  * @link        https://webschedulr.co.za
- * @since       v1.0.0
+ * @since       v1.0.1
  * ---------------------------------------------------------------------------- */
 
 

@@ -337,3 +337,18 @@ define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
  * And away we go...
  */
 require_once BASEPATH . 'core/CodeIgniter.php';
+
+/*
+ *---------------------------------------------------------------
+ * CHECK ENVIRONMENT SETUP
+ *---------------------------------------------------------------
+ *
+ * Check if the .env file exists and contains the DB_DATABASE entry.
+ * If not, redirect to the setup page.
+ *
+ */
+$env_path = dirname(__DIR__) . '/.env';
+if (!file_exists($env_path) || strpos(file_get_contents($env_path), 'DB_DATABASE=') === false) {
+    header('Location: /setup.php');
+    exit;
+}

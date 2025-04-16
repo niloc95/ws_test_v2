@@ -1,0 +1,32 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Allow direct access to setup.php
+    RewriteRule ^setup\.php$ - [L]
+
+    # Block access to hidden files and sensitive files
+    RewriteRule "(^|/)\.(?!well-known)" - [F]
+    RewriteRule "^(composer\.json|composer\.lock|gulpfile\.js|package\.json|package-lock\.json|\.env)" - [F]
+
+    # Serve existing files/directories from root
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # --- Wildcard: Route everything else to the first subfolder (your app) ---
+    # Detect the first directory in the root (excluding setup.php and real files)
+    RewriteCond %{REQUEST_URI} !^/setup\.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^/]+)/(.*)$ $1/$2 [L]   # Already in a subfolder, do nothing
+
+    # If not in a subfolder, route to the first subfolder (replace 'appfolder' if you want a default)
+    RewriteCond %{REQUEST_URI} !^/setup\.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ bookings/$1 [L]   # <-- Change 'bookings' to your default app folder name
+</IfModule>
+
+<Files ".env">
+    Require all denied
+</Files>

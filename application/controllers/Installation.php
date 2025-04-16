@@ -212,16 +212,16 @@ class Installation extends WS_Controller
                 // Add other necessary variables based on user input or defaults
             ];
 
-            // **Option 1: Display to User (Recommended)**
+            // Option 1: Display to User (Recommended)
             $this->output
                  ->set_content_type('application/json')
                  ->set_output(json_encode([
                      'success' => true,
                      'message' => 'Installation data processed. Please create a `.env` file in the project root with the following content:',
                      'dotenv_content' => implode("\n", $dotenv_content),
-                     'next_step' => 'create_env_file' // Signal to JS what to do
+                     'next_step' => 'create_env_file'
                  ]));
-            return; // Stop execution here until user confirms .env creation
+            return;
 
             // **Option 2: Attempt to Write (Less Secure - Requires careful permission handling)**
             /*

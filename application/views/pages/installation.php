@@ -128,6 +128,12 @@
                     <small class="form-text text-muted"><?= lang('company_link_hint') ?></small>
                 </div>
             </div>
+            <div class="col-12 text-center">
+            <button type="submit" id="install" class="btn btn-primary btn-lg">
+                <i class="icon-white icon-ok me-2"></i>
+                Install @webSchedulr
+            </button>
+        </div>
         </form>
     <?php endif; ?>
 

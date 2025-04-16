@@ -14,3 +14,43 @@ nilo@webscheduler.co.za
 mark.jones@frontend.co.za
 jarred.fuller@frontend.co.za
 hosting@frontend.co.za
+
+
+
+# /* ----------------------------------------------------------------------------
+#  * @webSchedulr - Your comprehensive scheduling and calendar management solution
+#  *
+#  * @package     @webSchedulr - Online Appointments
+#  * @author      N N.Cara <nilo.cara@frontend.co.za>
+#  * @copyright   Copyright (c) Nilo Cara
+#  * @license     https://opensource.org/licenses/GPL-3.0 - GPLv3
+#  * @link        https://webschedulr.co.za
+#  * @since       v1.0.0
+#  * ---------------------------------------------------------------------------- */
+
+GOOGLE_SYNC_FEATURE=false
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+
+
+
+# APP_ENV=development
+# DEBUG_MODE=true
+# BASE_URL=https://test.webschedulr.com/build
+
+# DB_HOSTNAME=localhost
+# DB_USERNAME=u333814045_new
+# DB_PASSWORD=!Shinesun12==++
+# DB_DATABASE=u333814045_new
+# DB_HOST=mysql
+# DB_DRIVER=mysqli
+
+# # Generate a secure key using: php -r "echo base64_encode(random_bytes(32));"
+# ENCRYPTION_KEY=changeme
+
+# # Google Calendar Sync Settings
+
+# GOOGLE_SYNC_FEATURE=false
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=

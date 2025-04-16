@@ -25,8 +25,17 @@ const zip = require('zip-dir');
 function archive(done) {
     const filename = '@webSchedulr-0.0.0.zip';
 
-    fs.removeSync('build');
-    fs.removeSync(filename);
+    // Check and remove 'build' directory if it exists
+    if (fs.existsSync('build')) {
+        fs.removeSync('build');
+        console.log('Removed existing build directory.');
+    }
+
+    // Check and remove build zip if it exists
+    if (fs.existsSync(filename)) {
+        fs.removeSync(filename);
+        console.log('Removed existing build zip.');
+    }
 
     fs.mkdirsSync('build');
     fs.copySync('application', 'build/application');
@@ -60,6 +69,8 @@ function archive(done) {
     fs.copySync('CHANGELOG.md', 'build/CHANGELOG.md');
     fs.copySync('README.md', 'build/README.md');
     fs.copySync('LICENSE', 'build/LICENSE');
+    fs.copySync('setup.php', 'build/setup.php');
+    fs.copySync('.htaccess', 'build/.htaccess');
 
     childProcess.execSync('cd build && composer install --no-interaction --no-dev --no-scripts --optimize-autoloader');
 
@@ -187,18 +198,18 @@ function vendor(done) {
     done();
 }
 
-function copyEnvTemplate(done) {
-    // Copy .env.example to .env in the build directory if .env does not already exist
-    const src = '.env.example';
-    const dest = 'build/.env';
-    if (!fs.existsSync(dest)) {
-        fs.copySync(src, dest);
-        console.log('.env file created in build/ from .env.example');
-    } else {
-        console.log('.env already exists in build/, not overwritten.');
-    }
-    done();
-}
+// function copyEnvTemplate(done) {
+//     // Copy .env.example to .env in the build directory if .env does not already exist
+//     const src = '.env.example';
+//     const dest = 'build/.env';
+//     if (!fs.existsSync(dest)) {
+//         fs.copySync(src, dest);
+//         console.log('.env file created in build/ from .env.example');
+//     } else {
+//         console.log('.env already exists in build/, not overwritten.');
+//     }
+//     done();
+// }
 
 exports.clean = gulp.series(clean);
 exports.vendor = gulp.series(vendor);
@@ -206,5 +217,5 @@ exports.scripts = gulp.series(scripts);
 exports.styles = gulp.series(styles);
 exports.compile = gulp.series(clean, vendor, scripts, styles);
 exports.dev = gulp.series(clean, vendor, scripts, styles, watch);
-exports.build = gulp.series(clean, vendor, scripts, styles, archive, copyEnvTemplate);
+exports.build = gulp.series(clean, vendor, scripts, styles, archive);
 exports.default = exports.dev;
